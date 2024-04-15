@@ -19,8 +19,10 @@ public class QueryFactory {
                 .build();
     }
 
-    //Todo: Should be handled as well
-    public static Query buildReplaceQuery(String collectionName, String id, JsonNode newEntityData) {
+    public static Query buildReplaceQuery(String collectionName, String id, JsonNode newEntityData, String collectionId) {
+        if (newEntityData instanceof ObjectNode mutableData) {
+            mutableData.remove(collectionId);
+        }
         return new DocumentQueryBuilder()
                 .collection(collectionName)
                 .replace(id, newEntityData)

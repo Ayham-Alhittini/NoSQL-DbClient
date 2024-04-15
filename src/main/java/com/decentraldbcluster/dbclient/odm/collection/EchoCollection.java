@@ -36,9 +36,9 @@ public class EchoCollection<Entity> {
         JsonNode json = mapper.valueToTree(entity);
         Query query;
         if (json.get(collectionId).isNull()) {
-            query = QueryFactory.buildInsertQuery(collectionName, mapper.valueToTree(entity), collectionId);
+            query = QueryFactory.buildInsertQuery(collectionName, json, collectionId);
         } else {
-            query = QueryFactory.buildReplaceQuery(collectionName, json.get(collectionId).asText(), json);
+            query = QueryFactory.buildReplaceQuery(collectionName, json.get(collectionId).asText(), json, collectionId);
         }
         QueryResponse response = dbClient.executeQuery(query);
         return responseHandler.parseResponse(response, singleEntityType, collectionId);
