@@ -27,10 +27,11 @@ public class QueryFactory {
                 .build();
     }
 
-    public static Query buildFindAllQuery(String collectionName) {
+    public static Query buildFindAllQuery(String collectionName, JsonNode filter) {
         return new DocumentQueryBuilder()
                 .collection(collectionName)
                 .findAll()
+                .where(filter)
                 .build();
     }
 

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public class EchoCollection<Entity> {
@@ -43,10 +44,30 @@ public class EchoCollection<Entity> {
         return responseHandler.parseResponse(response, singleEntityType, collectionId);
     }
 
-    public List<Entity> findAll() {
-        Query query = QueryFactory.buildFindAllQuery(collectionName);
+    public List<Entity> findAll(JsonNode jsonNode) {
+        Query query = QueryFactory.buildFindAllQuery(collectionName, jsonNode);
         QueryResponse response = dbClient.executeQuery(query);
         return responseHandler.parseResponse(response, entityType, collectionId);
+    }
+    public List<Entity> findAll() {
+        Query query = QueryFactory.buildFindAllQuery(collectionName, null);
+        QueryResponse response = dbClient.executeQuery(query);
+        return responseHandler.parseResponse(response, entityType, collectionId);
+    }
+
+    public List<Entity> findAll(String jsonStr) {
+        try {
+            return findAll( mapper.readTree(jsonStr) );
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public List<Entity> findAll(Map<String, Object> filter) {
+        try {
+            return findAll((JsonNode) mapper.valueToTree(filter));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public Optional<Entity> findById(String id) {
