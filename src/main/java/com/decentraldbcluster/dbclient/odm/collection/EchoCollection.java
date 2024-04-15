@@ -22,36 +22,38 @@ public class EchoCollection<Entity> {
     private final String collectionName;
     private final JavaType entityType;
     private final JavaType singleEntityType;
+    private final String collectionId;
 
-    public EchoCollection(Class<Entity> clazz, String collectionName) {
+    public EchoCollection(Class<Entity> clazz, String collectionName, String collectionId) {
         this.collectionName = collectionName;
         this.entityType = mapper.getTypeFactory().constructParametricType(List.class, clazz);
         this.singleEntityType = mapper.getTypeFactory().constructType(clazz);
+        this.collectionId = collectionId;
     }
 
     public Entity save(Entity entity) {
         JsonNode json = mapper.valueToTree(entity);
         Query query;
-        if (json.get("object_id").isNull()) {
-            query = QueryFactory.buildInsertQuery(collectionName, mapper.valueToTree(entity));
+        if (json.get(collectionId).isNull()) {
+            query = QueryFactory.buildInsertQuery(collectionName, mapper.valueToTree(entity), collectionId);
         } else {
-            query = QueryFactory.buildReplaceQuery(collectionName, json.get("object_id").asText(), json);
+            query = QueryFactory.buildReplaceQuery(collectionName, json.get(collectionId).asText(), json);
         }
         QueryResponse response = dbClient.executeQuery(query);
-        return responseHandler.parseResponse(response, singleEntityType);
+        return responseHandler.parseResponse(response, singleEntityType, collectionId);
     }
 
     public List<Entity> findAll() {
         Query query = QueryFactory.buildFindAllQuery(collectionName);
         QueryResponse response = dbClient.executeQuery(query);
-        return responseHandler.parseResponse(response, entityType);
+        return responseHandler.parseResponse(response, entityType, collectionId);
     }
 
     public Optional<Entity> findById(String id) {
         Query query = QueryFactory.buildFindByIdQuery(collectionName, id);
         QueryResponse response = dbClient.executeQuery(query);
         if (response.isSucceed()) {
-            return Optional.of(responseHandler.parseResponse(response, singleEntityType));
+            return Optional.of(responseHandler.parseResponse(response, singleEntityType, collectionId));
         }
         return Optional.empty();
     }

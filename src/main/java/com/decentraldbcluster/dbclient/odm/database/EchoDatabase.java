@@ -1,21 +1,22 @@
 package com.decentraldbcluster.dbclient.odm.database;
-import com.decentraldbcluster.dbclient.odm.collection.EchoCollectionFactory;
-import com.decentraldbcluster.dbclient.odm.collection.EchoCollection;
-import com.decentraldbcluster.dbclient.query.builders.CollectionQueryBuilder;
 
-import java.io.*;
+import com.decentraldbcluster.dbclient.annotaions.Id;
+import com.decentraldbcluster.dbclient.odm.collection.EchoCollection;
+import com.decentraldbcluster.dbclient.odm.collection.EchoCollectionFactory;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.HashSet;
 import java.util.Set;
 
 public abstract class EchoDatabase {
     public EchoDatabase() {
-        trackCollectionChanges();
         initializeCollections();
+        trackCollectionChanges();
     }
 
     private void initializeCollections() {
@@ -30,7 +31,8 @@ public abstract class EchoDatabase {
                         Type[] fieldArgTypes = parameterizedType.getActualTypeArguments();
                         if (fieldArgTypes.length > 0) {
                             Class<?> fieldArgClass = (Class<?>) fieldArgTypes[0];
-                            EchoCollection<?> newInstance = EchoCollectionFactory.create(field.getName(), fieldArgClass);
+                            String collectionId = getCollectionId(fieldArgClass);
+                            EchoCollection<?> newInstance = EchoCollectionFactory.create(field.getName(), fieldArgClass, collectionId);
                             field.set(this, newInstance);
                         }
                     }
@@ -41,6 +43,14 @@ public abstract class EchoDatabase {
         }
     }
 
+    private String getCollectionId(Class<?> clazz) {
+        for (Field field : clazz.getDeclaredFields()) {
+            if (field.isAnnotationPresent(Id.class)) {
+                return field.getName();
+            }
+        }
+        throw new RuntimeException("Missing Id");
+    }
     private void trackCollectionChanges() {
 //        if (!Files.exists(Path.of("src/main/resources/collectionStateTracker.ser"))) {
 //            for (Field field: this.getClass().getDeclaredFields()) {

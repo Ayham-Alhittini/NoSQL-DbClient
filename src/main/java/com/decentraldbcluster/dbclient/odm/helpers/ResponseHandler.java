@@ -13,10 +13,11 @@ public class ResponseHandler {
         this.mapper = mapper;
     }
 
-    public <T> T parseResponse(QueryResponse response, JavaType type) {
+    public <T> T parseResponse(QueryResponse response, JavaType type, String collectionId) {
         if (response.isSucceed()) {
             try {
-                return mapper.readValue(response.getResult(), type);
+                String json = response.getResult().replace("\"object_id\"", "\""+collectionId+"\"");
+                return mapper.readValue(json, type);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
