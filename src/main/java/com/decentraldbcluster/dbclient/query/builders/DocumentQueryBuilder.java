@@ -1,7 +1,7 @@
-package com.decentraldbcluster.dbclient.builders;
+package com.decentraldbcluster.dbclient.query.builders;
 
-import com.decentraldbcluster.dbclient.actions.DocumentAction;
-import com.decentraldbcluster.dbclient.queries.DocumentQuery;
+import com.decentraldbcluster.dbclient.query.actions.DocumentAction;
+import com.decentraldbcluster.dbclient.query.types.DocumentQuery;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -80,7 +80,7 @@ public class DocumentQueryBuilder implements QueryBuilder {
     }
 
     //Rely on condition
-    public DocumentQueryBuilder select() {
+    public DocumentQueryBuilder findAll() {
         query.setDocumentAction(DocumentAction.SELECT);
         return this;
     }

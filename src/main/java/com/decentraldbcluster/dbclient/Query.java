@@ -10,14 +10,6 @@ public abstract class Query {
     @JsonProperty
     protected String collection;
 
-    public String getOriginator() {
-        return originator;
-    }
-
-    public String getDatabase() {
-        return database;
-    }
-
     public String getCollection() {
         return collection;
     }

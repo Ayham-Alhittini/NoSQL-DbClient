@@ -1,8 +1,8 @@
-package com.decentraldbcluster.dbclient.builders;
+package com.decentraldbcluster.dbclient.query.builders;
 
 
-import com.decentraldbcluster.dbclient.actions.CollectionAction;
-import com.decentraldbcluster.dbclient.queries.CollectionQuery;
+import com.decentraldbcluster.dbclient.query.actions.CollectionAction;
+import com.decentraldbcluster.dbclient.query.types.CollectionQuery;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

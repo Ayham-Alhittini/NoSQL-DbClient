@@ -1,8 +1,8 @@
-package com.decentraldbcluster.dbclient.queries;
+package com.decentraldbcluster.dbclient.query.types;
 
 
 import com.decentraldbcluster.dbclient.Query;
-import com.decentraldbcluster.dbclient.actions.DocumentAction;
+import com.decentraldbcluster.dbclient.query.actions.DocumentAction;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public class DocumentQuery extends Query {

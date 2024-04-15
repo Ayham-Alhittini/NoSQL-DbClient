@@ -1,9 +1,9 @@
 package com.decentraldbcluster.dbclient.validation;
 
 import com.decentraldbcluster.dbclient.Query;
-import com.decentraldbcluster.dbclient.queries.CollectionQuery;
-import com.decentraldbcluster.dbclient.queries.DocumentQuery;
-import com.decentraldbcluster.dbclient.queries.IndexQuery;
+import com.decentraldbcluster.dbclient.query.types.CollectionQuery;
+import com.decentraldbcluster.dbclient.query.types.DocumentQuery;
+import com.decentraldbcluster.dbclient.query.types.IndexQuery;
 
 public class QueryValidator {
     public static void validate(Query query) {

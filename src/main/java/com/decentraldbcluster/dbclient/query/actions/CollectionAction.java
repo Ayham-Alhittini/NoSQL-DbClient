@@ -1,4 +1,4 @@
-package com.decentraldbcluster.dbclient.actions;
+package com.decentraldbcluster.dbclient.query.actions;
 
 public enum CollectionAction {
     CREATE, DROP, SHOW

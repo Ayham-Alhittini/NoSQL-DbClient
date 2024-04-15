@@ -1,4 +1,4 @@
-package com.decentraldbcluster.dbclient.builders;
+package com.decentraldbcluster.dbclient.query.builders;
 
 import com.decentraldbcluster.dbclient.Query;
 

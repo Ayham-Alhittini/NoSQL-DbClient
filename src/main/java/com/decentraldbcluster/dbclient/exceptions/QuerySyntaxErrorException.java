@@ -5,7 +5,4 @@ public class QuerySyntaxErrorException extends RuntimeException {
         super(message);
     }
 
-    public QuerySyntaxErrorException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

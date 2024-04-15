@@ -1,7 +1,7 @@
-package com.decentraldbcluster.dbclient.builders;
+package com.decentraldbcluster.dbclient.query.builders;
 
-import com.decentraldbcluster.dbclient.actions.IndexAction;
-import com.decentraldbcluster.dbclient.queries.IndexQuery;
+import com.decentraldbcluster.dbclient.query.actions.IndexAction;
+import com.decentraldbcluster.dbclient.query.types.IndexQuery;
 
 public class IndexQueryBuilder implements QueryBuilder {
     private final IndexQuery query = new IndexQuery();

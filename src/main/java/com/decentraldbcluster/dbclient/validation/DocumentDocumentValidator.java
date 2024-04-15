@@ -1,8 +1,8 @@
 package com.decentraldbcluster.dbclient.validation;
 
-import com.decentraldbcluster.dbclient.actions.DocumentAction;
+import com.decentraldbcluster.dbclient.query.actions.DocumentAction;
 import com.decentraldbcluster.dbclient.exceptions.QuerySyntaxErrorException;
-import com.decentraldbcluster.dbclient.queries.DocumentQuery;
+import com.decentraldbcluster.dbclient.query.types.DocumentQuery;
 
 import java.util.ArrayList;
 import java.util.List;

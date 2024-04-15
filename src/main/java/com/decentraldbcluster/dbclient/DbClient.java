@@ -1,8 +1,9 @@
 package com.decentraldbcluster.dbclient;
 
-import com.decentraldbcluster.dbclient.queries.CollectionQuery;
-import com.decentraldbcluster.dbclient.queries.DocumentQuery;
-import com.decentraldbcluster.dbclient.queries.IndexQuery;
+import com.decentraldbcluster.dbclient.config.ConfigLoader;
+import com.decentraldbcluster.dbclient.query.types.CollectionQuery;
+import com.decentraldbcluster.dbclient.query.types.DocumentQuery;
+import com.decentraldbcluster.dbclient.query.types.IndexQuery;
 import com.decentraldbcluster.dbclient.response.QueryResponse;
 import com.decentraldbcluster.dbclient.validation.QueryValidator;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,10 +16,18 @@ import java.nio.charset.StandardCharsets;
 
 public class DbClient {
 
+    private static DbClient instance;
     private final DbConnection connection;
 
-    public DbClient(DbConnection connection) {
-        this.connection = connection;
+    private DbClient() {
+        ConfigLoader config = new ConfigLoader();
+        connection = new DbConnection(config.getApiKey(), config.getApiSecret());
+    }
+
+    public static DbClient getInstance() {
+        if (instance == null)
+            instance = new DbClient();
+        return instance;
     }
 
     public QueryResponse executeQuery(Query query) throws IllegalArgumentException {

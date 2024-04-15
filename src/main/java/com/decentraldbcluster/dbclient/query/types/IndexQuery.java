@@ -1,7 +1,7 @@
-package com.decentraldbcluster.dbclient.queries;
+package com.decentraldbcluster.dbclient.query.types;
 
 import com.decentraldbcluster.dbclient.Query;
-import com.decentraldbcluster.dbclient.actions.IndexAction;
+import com.decentraldbcluster.dbclient.query.actions.IndexAction;
 
 public class IndexQuery extends Query {
     private IndexAction indexAction;

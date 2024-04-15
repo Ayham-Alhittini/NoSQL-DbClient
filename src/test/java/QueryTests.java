@@ -1,26 +1,20 @@
-import com.decentraldbcluster.dbclient.DbClient;
-import com.decentraldbcluster.dbclient.DbConnection;
 import com.decentraldbcluster.dbclient.Query;
-import com.decentraldbcluster.dbclient.builders.CollectionQueryBuilder;
-import com.decentraldbcluster.dbclient.builders.DocumentQueryBuilder;
-import com.decentraldbcluster.dbclient.builders.IndexQueryBuilder;
-import org.junit.jupiter.api.Test;
+import com.decentraldbcluster.dbclient.query.builders.CollectionQueryBuilder;
+import com.decentraldbcluster.dbclient.query.builders.DocumentQueryBuilder;
+import com.decentraldbcluster.dbclient.query.builders.IndexQueryBuilder;
+import org.junit.Test;
 
-public class ApplicationTests {
+public class QueryTests {
     @Test
-    public void Main() {
-        DbConnection connection = new DbConnection("CSgeORGvezm+uirSZFqlul9msPNm+/ytCF78wY3o/YeBxifDQq0dvOZ2eW4qGd94Q2XEP+DCfgFrCd+SS6PK6on4eRhl5kW7q8iOx2boLK8=",
-                "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1OGMyZGRlNS0yNDZhLTQ3NGYtYjEwZC1iY2M1ZDYyZDIyNGIiLCJpYXQiOjE3MTEwNTEyNDgsImVtYWlsIjoiYXloYW0uaGl0dGluaTI2OEBnbWFpbC5jb20iLCJ1c2VybmFtZSI6IkF5aGFtIn0.P0OGl50k5QaFm3XmKYfMSltIi_eOZUlW1Nwr_KVbzWU");
-
-        DbClient client = new DbClient(connection);
-        Query query = showCollections();
-        System.out.println(client.executeQuery(query));
-    }
+    public void Main() {}
 
     //--------- Document Queries
+
     private Query select() {
         return new DocumentQueryBuilder()
-                .collection("users").select().build();
+                .collection("users")
+                .findById("5b75aa85-69ae-4fd3-bf2f-797f5d4fde911")
+                .build();
     }
 
     private Query addQuery() {
@@ -99,6 +93,7 @@ public class ApplicationTests {
                 .delete("6df199a3-1e63-4dce-9ded-3ced35db23511")
                 .build();
     }
+
 
     //--------- Collection Queries
 
