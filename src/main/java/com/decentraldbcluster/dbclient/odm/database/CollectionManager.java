@@ -1,7 +1,7 @@
 package com.decentraldbcluster.dbclient.odm.database;
 
-import com.decentraldbcluster.dbclient.DbClient;
-import com.decentraldbcluster.dbclient.Query;
+import com.decentraldbcluster.dbclient.core.DbClient;
+import com.decentraldbcluster.dbclient.core.Query;
 import com.decentraldbcluster.dbclient.odm.annotations.Id;
 import com.decentraldbcluster.dbclient.odm.collection.Collection;
 import com.decentraldbcluster.dbclient.odm.collection.CollectionFactory;

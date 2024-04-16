@@ -1,7 +1,7 @@
 package com.decentraldbcluster.dbclient.odm.collection;
 
-import com.decentraldbcluster.dbclient.DbClient;
-import com.decentraldbcluster.dbclient.Query;
+import com.decentraldbcluster.dbclient.core.DbClient;
+import com.decentraldbcluster.dbclient.core.Query;
 import com.decentraldbcluster.dbclient.query.QueryFactory;
 import com.decentraldbcluster.dbclient.response.QueryResponse;
 import com.fasterxml.jackson.databind.JavaType;

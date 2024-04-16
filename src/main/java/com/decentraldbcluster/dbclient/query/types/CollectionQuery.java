@@ -1,7 +1,7 @@
 package com.decentraldbcluster.dbclient.query.types;
 
 
-import com.decentraldbcluster.dbclient.Query;
+import com.decentraldbcluster.dbclient.core.Query;
 import com.decentraldbcluster.dbclient.query.actions.CollectionAction;
 import com.fasterxml.jackson.databind.JsonNode;
 
