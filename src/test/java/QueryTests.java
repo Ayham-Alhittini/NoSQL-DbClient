@@ -7,22 +7,6 @@ public class QueryTests {
     @Test
     public void Main() {}
 
-    //--------- Collection Queries
-
-
-    private Query createCollection() {
-        return new CollectionQueryBuilder()
-                .createCollection("users2")
-                .build();
-    }
-
-    private Query dropCollection() {
-        return new CollectionQueryBuilder()
-                .createCollection("users2")
-                .build();
-    }
-
-
     //--------- Index Queries
 
     private Query createIndex() {

@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-public class EchoCollection<Entity> {
+public class Collection<Entity> {
 
     private final DbClient dbClient = DbClient.getInstance();
     private final ObjectMapper mapper = ObjectMapperConfigurator.configureMapper();
@@ -25,7 +25,7 @@ public class EchoCollection<Entity> {
     private final JavaType singleEntityType;
     private final String collectionId;
 
-    public EchoCollection(Class<Entity> clazz, String collectionName, String collectionId) {
+    public Collection(Class<Entity> clazz, String collectionName, String collectionId) {
         this.collectionName = collectionName;
         this.entityType = mapper.getTypeFactory().constructParametricType(List.class, clazz);
         this.singleEntityType = mapper.getTypeFactory().constructType(clazz);
