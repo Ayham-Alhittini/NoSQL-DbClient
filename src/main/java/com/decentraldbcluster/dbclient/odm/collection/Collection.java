@@ -2,9 +2,7 @@ package com.decentraldbcluster.dbclient.odm.collection;
 
 import com.decentraldbcluster.dbclient.DbClient;
 import com.decentraldbcluster.dbclient.Query;
-import com.decentraldbcluster.dbclient.odm.helpers.ObjectMapperConfigurator;
-import com.decentraldbcluster.dbclient.odm.helpers.QueryFactory;
-import com.decentraldbcluster.dbclient.odm.helpers.ResponseHandler;
+import com.decentraldbcluster.dbclient.query.QueryFactory;
 import com.decentraldbcluster.dbclient.response.QueryResponse;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;

@@ -1,7 +1,9 @@
-package com.decentraldbcluster.dbclient.odm.helpers;
+package com.decentraldbcluster.dbclient.query;
 
 import com.decentraldbcluster.dbclient.Query;
+import com.decentraldbcluster.dbclient.query.builders.CollectionQueryBuilder;
 import com.decentraldbcluster.dbclient.query.builders.DocumentQueryBuilder;
+import com.decentraldbcluster.dbclient.query.builders.IndexQueryBuilder;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -48,6 +50,30 @@ public class QueryFactory {
         return new DocumentQueryBuilder()
                 .collection(collectionName)
                 .delete(id)
+                .build();
+    }
+
+    public static Query buildCreateCollectionQuery(String collectionName) {
+        return new CollectionQueryBuilder()
+                .createCollection(collectionName)
+                .build();
+    }
+    public static Query buildDropCollectionQuery(String collectionName) {
+        return new CollectionQueryBuilder()
+                .dropCollection(collectionName)
+                .build();
+    }
+
+    public static Query buildCreateIndexQuery(String collectionName, String indexedFiled) {
+        return new IndexQueryBuilder()
+                .collection(collectionName)
+                .createIndex(indexedFiled)
+                .build();
+    }
+    public static Query buildDropIndexQuery(String collectionName, String indexedFiled) {
+        return new IndexQueryBuilder()
+                .collection(collectionName)
+                .dropIndex(indexedFiled)
                 .build();
     }
 }

@@ -1,4 +1,4 @@
-package com.decentraldbcluster.dbclient.odm.helpers;
+package com.decentraldbcluster.dbclient.odm.collection;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
