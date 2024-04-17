@@ -1,4 +1,4 @@
-package com.decentraldbcluster.dbclient.core;
+package com.decentraldbcluster.dbclient.core.query;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,6 +1,6 @@
 package com.decentraldbcluster.dbclient.validation;
 
-import com.decentraldbcluster.dbclient.exceptions.QuerySyntaxErrorException;
+import com.decentraldbcluster.dbclient.validation.exceptions.QuerySyntaxErrorException;
 import com.decentraldbcluster.dbclient.query.types.IndexQuery;
 
 import java.util.ArrayList;

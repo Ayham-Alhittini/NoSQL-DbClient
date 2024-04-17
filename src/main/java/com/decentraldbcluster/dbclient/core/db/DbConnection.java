@@ -1,4 +1,4 @@
-package com.decentraldbcluster.dbclient.core;
+package com.decentraldbcluster.dbclient.core.db;
 
 import com.decentraldbcluster.dbclient.util.DataEncryptor;
 

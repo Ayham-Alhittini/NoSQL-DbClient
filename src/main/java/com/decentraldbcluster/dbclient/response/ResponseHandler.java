@@ -1,4 +1,4 @@
-package com.decentraldbcluster.dbclient.odm.collection;
+package com.decentraldbcluster.dbclient.response;
 
 import com.decentraldbcluster.dbclient.response.QueryResponse;
 import com.fasterxml.jackson.databind.JavaType;

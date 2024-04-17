@@ -1,6 +1,6 @@
 package com.decentraldbcluster.dbclient.query;
 
-import com.decentraldbcluster.dbclient.core.Query;
+import com.decentraldbcluster.dbclient.core.query.Query;
 import com.decentraldbcluster.dbclient.query.builders.CollectionQueryBuilder;
 import com.decentraldbcluster.dbclient.query.builders.DocumentQueryBuilder;
 import com.decentraldbcluster.dbclient.query.builders.IndexQueryBuilder;

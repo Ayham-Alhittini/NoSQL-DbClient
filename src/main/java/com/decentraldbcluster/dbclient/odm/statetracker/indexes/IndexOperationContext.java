@@ -1,4 +1,4 @@
-package com.decentraldbcluster.dbclient.odm.statetracker;
+package com.decentraldbcluster.dbclient.odm.statetracker.indexes;
 
 import java.util.Map;
 import java.util.Set;

@@ -1,9 +1,10 @@
 package com.decentraldbcluster.dbclient.odm.collection;
 
 import com.decentraldbcluster.dbclient.core.DbClient;
-import com.decentraldbcluster.dbclient.core.Query;
+import com.decentraldbcluster.dbclient.core.query.Query;
 import com.decentraldbcluster.dbclient.query.QueryFactory;
 import com.decentraldbcluster.dbclient.response.QueryResponse;
+import com.decentraldbcluster.dbclient.response.ResponseHandler;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

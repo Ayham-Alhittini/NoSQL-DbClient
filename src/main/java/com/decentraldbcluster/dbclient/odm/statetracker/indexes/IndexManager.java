@@ -1,7 +1,7 @@
-package com.decentraldbcluster.dbclient.odm.statetracker;
+package com.decentraldbcluster.dbclient.odm.statetracker.indexes;
 
 import com.decentraldbcluster.dbclient.core.DbClient;
-import com.decentraldbcluster.dbclient.core.Query;
+import com.decentraldbcluster.dbclient.core.query.Query;
 import com.decentraldbcluster.dbclient.query.QueryFactory;
 
 import java.util.HashSet;
@@ -9,7 +9,11 @@ import java.util.Map;
 import java.util.Set;
 
 public class IndexManager {
-    private final DbClient dbClient = DbClient.getInstance();
+    private final DbClient dbClient;
+
+    public IndexManager(DbClient dbClient) {
+        this.dbClient = dbClient;
+    }
 
     public void manageIndexes(IndexOperationContext context) {
         createIndexesForNewCollections(context.addedCollections, context.currentState);

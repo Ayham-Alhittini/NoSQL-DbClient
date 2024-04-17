@@ -1,6 +1,6 @@
 package com.decentraldbcluster.dbclient.validation;
 
-import com.decentraldbcluster.dbclient.core.Query;
+import com.decentraldbcluster.dbclient.core.query.Query;
 import com.decentraldbcluster.dbclient.query.types.CollectionQuery;
 import com.decentraldbcluster.dbclient.query.types.DocumentQuery;
 import com.decentraldbcluster.dbclient.query.types.IndexQuery;
