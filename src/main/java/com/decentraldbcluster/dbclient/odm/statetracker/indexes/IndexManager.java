@@ -9,12 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class IndexManager {
-    private final DbClient dbClient;
-
-    public IndexManager(DbClient dbClient) {
-        this.dbClient = dbClient;
-    }
-
+    private final DbClient dbClient = DbClient.getInstance();
     public void manageIndexes(IndexOperationContext context) {
         createIndexesForNewCollections(context.addedCollections, context.currentState);
         updateIndexesForExistingCollections(context);

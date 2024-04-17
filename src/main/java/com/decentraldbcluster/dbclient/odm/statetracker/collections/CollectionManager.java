@@ -7,11 +7,7 @@ import com.decentraldbcluster.dbclient.query.QueryFactory;
 import java.util.Set;
 
 public class CollectionManager {
-    private final DbClient dbClient;
-
-    public CollectionManager(DbClient dbClient) {
-        this.dbClient = dbClient;
-    }
+    private final DbClient dbClient = DbClient.getInstance();
 
 
     public void manageCollections(Set<String> added, Set<String> removed) {

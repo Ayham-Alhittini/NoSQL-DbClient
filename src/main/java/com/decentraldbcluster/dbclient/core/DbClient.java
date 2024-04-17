@@ -4,7 +4,6 @@ import com.decentraldbcluster.dbclient.config.ConfigurationManager;
 import com.decentraldbcluster.dbclient.core.db.DbConnection;
 import com.decentraldbcluster.dbclient.core.query.Query;
 import com.decentraldbcluster.dbclient.core.query.QueryExecutor;
-import com.decentraldbcluster.dbclient.odm.statetracker.DatabaseStateTracker;
 import com.decentraldbcluster.dbclient.response.QueryResponse;
 
 public class DbClient {
@@ -20,7 +19,6 @@ public class DbClient {
     public static DbClient getInstance() {
         if (instance == null) {
             instance = new DbClient();
-            DatabaseStateTracker.track(instance);
         }
         return instance;
     }

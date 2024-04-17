@@ -1,36 +1,23 @@
 package com.decentraldbcluster.dbclient.odm.statetracker;
 
-import com.decentraldbcluster.dbclient.core.DbClient;
-import com.decentraldbcluster.dbclient.odm.database.*;
+import com.decentraldbcluster.dbclient.odm.database.Database;
 import com.decentraldbcluster.dbclient.odm.statetracker.collections.CollectionManager;
 import com.decentraldbcluster.dbclient.odm.statetracker.indexes.IndexManager;
 import com.decentraldbcluster.dbclient.odm.statetracker.indexes.IndexOperationContext;
-import com.decentraldbcluster.dbclient.util.DatabaseSubClassUtil;
 
 import java.util.Map;
 import java.util.Set;
 
 public class DatabaseStateTracker {
 
-    private static final Class<? extends Database> subclass = DatabaseSubClassUtil.getDatabaseSubClass();
+
+    private static final CollectionManager collectionManager = new CollectionManager();
+    private static final IndexManager indexManager = new IndexManager();
+    private static final StateManager stateManager = new StateManager();
 
 
 
-    private static CollectionManager collectionManager;
-    private static IndexManager indexManager;
-    private static StateManager stateManager;
-
-
-    private static void initializeManager(DbClient dbClient) {
-        collectionManager = new CollectionManager(dbClient);
-        indexManager = new IndexManager(dbClient);
-        stateManager = new StateManager();
-    }
-
-
-    public static void track(DbClient dbClient) {
-
-        initializeManager(dbClient);
+    public static void track(Class<? extends Database> subclass) {
 
         Map<String, Set<String>> previousState = stateManager.deserializeState();
         Map<String, Set<String>> currentState = stateManager.getCurrentDatabaseState(subclass);

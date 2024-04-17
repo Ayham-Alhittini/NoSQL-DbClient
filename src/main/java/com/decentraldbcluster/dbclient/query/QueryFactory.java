@@ -8,23 +8,29 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class QueryFactory {
-    public static Query buildInsertQuery(String collectionName, JsonNode entityData, String collectionId) {
-        if (entityData instanceof ObjectNode mutableData) {
-            JsonNode collectionIdTextNode = mutableData.get(collectionId);
-            mutableData.remove(collectionId);
-            mutableData.put("object_id", collectionIdTextNode.asText());
-        }
 
+    public static Query buildSaveQuery(String collectionName, JsonNode entity, String collectionIdName) {
+        JsonNode collectionId;
+        if (entity instanceof ObjectNode mutableData) {
+            collectionId = mutableData.remove(collectionIdName);
+        } else {
+            throw new RuntimeException("Invalid entity type");
+        }
+        if (collectionId.isNull()) {
+            return QueryFactory.buildInsertQuery(collectionName, entity);
+        } else {
+            return QueryFactory.buildReplaceQuery(collectionName, collectionId.asText(), entity);
+        }
+    }
+
+    public static Query buildInsertQuery(String collectionName, JsonNode entityData) {
         return new DocumentQueryBuilder()
                 .collection(collectionName)
                 .insert(entityData)
                 .build();
     }
 
-    public static Query buildReplaceQuery(String collectionName, String id, JsonNode newEntityData, String collectionId) {
-        if (newEntityData instanceof ObjectNode mutableData) {
-            mutableData.remove(collectionId);
-        }
+    public static Query buildReplaceQuery(String collectionName, String id, JsonNode newEntityData) {
         return new DocumentQueryBuilder()
                 .collection(collectionName)
                 .replace(id, newEntityData)

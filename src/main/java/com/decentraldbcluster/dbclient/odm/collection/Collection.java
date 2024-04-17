@@ -32,13 +32,7 @@ public class Collection<Entity> {
     }
 
     public Entity save(Entity entity) {
-        JsonNode json = mapper.valueToTree(entity);
-        Query query;
-        if (json.get(collectionId).isNull()) {
-            query = QueryFactory.buildInsertQuery(collectionName, json, collectionId);
-        } else {
-            query = QueryFactory.buildReplaceQuery(collectionName, json.get(collectionId).asText(), json, collectionId);
-        }
+        Query query = QueryFactory.buildSaveQuery(collectionName, mapper.valueToTree(entity), collectionId);
         QueryResponse response = dbClient.executeQuery(query);
         return responseHandler.parseResponse(response, singleEntityType, collectionId);
     }
