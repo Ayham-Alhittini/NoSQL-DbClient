@@ -6,6 +6,7 @@ import com.decentraldbcluster.dbclient.query.types.DocumentQuery;
 import com.decentraldbcluster.dbclient.query.types.IndexQuery;
 
 public class QueryValidator {
+    //Todo: consider move it to the server side
     public static void validate(Query query) {
 
         if (query instanceof CollectionQuery)
