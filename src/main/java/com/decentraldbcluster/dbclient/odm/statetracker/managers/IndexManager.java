@@ -1,7 +1,8 @@
-package com.decentraldbcluster.dbclient.odm.statetracker.indexes;
+package com.decentraldbcluster.dbclient.odm.statetracker.managers;
 
 import com.decentraldbcluster.dbclient.core.DbClient;
 import com.decentraldbcluster.dbclient.core.query.Query;
+import com.decentraldbcluster.dbclient.odm.statetracker.dataobject.IndexOperationContext;
 import com.decentraldbcluster.dbclient.query.QueryFactory;
 
 import java.util.HashSet;

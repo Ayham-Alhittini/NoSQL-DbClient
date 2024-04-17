@@ -1,13 +1,13 @@
-package com.decentraldbcluster.dbclient.odm.statetracker.indexes;
+package com.decentraldbcluster.dbclient.odm.statetracker.dataobject;
 
 import java.util.Map;
 import java.util.Set;
 
 public class IndexOperationContext {
-    Set<String> addedCollections;
-    Set<String> removedCollections;
-    Map<String, Set<String>> previousState;
-    Map<String, Set<String>> currentState;
+    public Set<String> addedCollections;
+    public Set<String> removedCollections;
+    public Map<String, Set<String>> previousState;
+    public Map<String, Set<String>> currentState;
 
     public IndexOperationContext(Set<String> addedCollections, Set<String> removedCollections,
                                  Map<String, Set<String>> previousState, Map<String, Set<String>> currentState) {

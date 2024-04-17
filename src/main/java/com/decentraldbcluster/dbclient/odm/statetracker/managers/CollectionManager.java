@@ -1,4 +1,4 @@
-package com.decentraldbcluster.dbclient.odm.statetracker.collections;
+package com.decentraldbcluster.dbclient.odm.statetracker.managers;
 
 import com.decentraldbcluster.dbclient.core.DbClient;
 import com.decentraldbcluster.dbclient.core.query.Query;

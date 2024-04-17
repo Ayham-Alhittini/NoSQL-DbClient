@@ -1,9 +1,10 @@
 package com.decentraldbcluster.dbclient.odm.statetracker;
 
 import com.decentraldbcluster.dbclient.odm.database.Database;
-import com.decentraldbcluster.dbclient.odm.statetracker.collections.CollectionManager;
-import com.decentraldbcluster.dbclient.odm.statetracker.indexes.IndexManager;
-import com.decentraldbcluster.dbclient.odm.statetracker.indexes.IndexOperationContext;
+import com.decentraldbcluster.dbclient.odm.statetracker.managers.CollectionManager;
+import com.decentraldbcluster.dbclient.odm.statetracker.managers.IndexManager;
+import com.decentraldbcluster.dbclient.odm.statetracker.dataobject.IndexOperationContext;
+import com.decentraldbcluster.dbclient.odm.statetracker.managers.StateManager;
 
 import java.util.Map;
 import java.util.Set;

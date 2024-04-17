@@ -1,4 +1,4 @@
-package com.decentraldbcluster.dbclient.odm.statetracker;
+package com.decentraldbcluster.dbclient.odm.statetracker.managers;
 
 import com.decentraldbcluster.dbclient.odm.annotations.Id;
 import com.decentraldbcluster.dbclient.odm.annotations.Indexed;
