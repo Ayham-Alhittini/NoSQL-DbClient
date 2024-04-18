@@ -48,13 +48,6 @@ public class Collection<Entity> {
         return responseHandler.parseResponse(response, entityType, collectionId);
     }
 
-    public List<Entity> findAll(String jsonStr) {
-        try {
-            return findAll( mapper.readTree(jsonStr) );
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
     public List<Entity> findAll(Map<String, Object> filter) {
         try {
             return findAll((JsonNode) mapper.valueToTree(filter));
