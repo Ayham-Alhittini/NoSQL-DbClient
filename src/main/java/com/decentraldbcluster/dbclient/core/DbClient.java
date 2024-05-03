@@ -1,6 +1,6 @@
 package com.decentraldbcluster.dbclient.core;
 
-import com.decentraldbcluster.dbclient.config.ConfigurationManager;
+import com.decentraldbcluster.dbclient.core.config.ConfigurationManager;
 import com.decentraldbcluster.dbclient.core.db.DbConnection;
 import com.decentraldbcluster.dbclient.core.query.Query;
 import com.decentraldbcluster.dbclient.core.query.QueryExecutor;

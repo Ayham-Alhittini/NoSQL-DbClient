@@ -1,7 +1,7 @@
 package com.decentraldbcluster.dbclient.odm.database;
 
 import com.decentraldbcluster.dbclient.odm.annotations.Id;
-import com.decentraldbcluster.dbclient.odm.collection.Collection;
+import com.decentraldbcluster.dbclient.odm.collection.DbClusterCollection;
 import com.decentraldbcluster.dbclient.odm.collection.CollectionFactory;
 
 import java.lang.reflect.Field;
@@ -13,7 +13,7 @@ public class DatabaseInitializer {
         Class<?> clazz = databaseInstance.getClass();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
-            if (Collection.class.isAssignableFrom(field.getType())) {
+            if (DbClusterCollection.class.isAssignableFrom(field.getType())) {
                 try {
                     field.setAccessible(true);
                     Type genericFieldType = field.getGenericType();
@@ -23,7 +23,7 @@ public class DatabaseInitializer {
                             Class<?> fieldArgClass = (Class<?>) fieldArgTypes[0];
 
                             String collectionId = getCollectionId(fieldArgClass);
-                            Collection<?> newInstance = CollectionFactory.create(field.getName(), fieldArgClass, collectionId);
+                            DbClusterCollection<?> newInstance = CollectionFactory.create(field.getName(), fieldArgClass, collectionId);
                             field.set(databaseInstance, newInstance);
                         }
                     }

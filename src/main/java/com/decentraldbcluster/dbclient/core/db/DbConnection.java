@@ -8,13 +8,13 @@ public class DbConnection {
     private final String originator;
     private final String token;
 
-    public DbConnection(String apiKey, String apiSecret) {
+    public DbConnection(String apiKey, String token) {
         try {
             var keyData = DataEncryptor.decryptApiKey(apiKey);
             this.nodeAddress = keyData[0];
             this.database = keyData[1];
             this.originator = keyData[2];
-            this.token = apiSecret;
+            this.token = token;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

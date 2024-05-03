@@ -1,4 +1,4 @@
-package com.decentraldbcluster.dbclient.config;
+package com.decentraldbcluster.dbclient.core.config;
 
 public class ConfigurationManager {
     static {

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class IndexQueryValidator {
+
     public static void validate(IndexQuery query) {
         List<String> errors = new ArrayList<>();
         if (query.getCollection() == null) errors.add("Collection name is missing");
@@ -17,4 +18,5 @@ public class IndexQueryValidator {
             throw new QuerySyntaxErrorException(errors.toString());
         }
     }
+
 }

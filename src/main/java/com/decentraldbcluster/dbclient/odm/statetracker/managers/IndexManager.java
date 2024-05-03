@@ -2,7 +2,7 @@ package com.decentraldbcluster.dbclient.odm.statetracker.managers;
 
 import com.decentraldbcluster.dbclient.core.DbClient;
 import com.decentraldbcluster.dbclient.core.query.Query;
-import com.decentraldbcluster.dbclient.odm.statetracker.dataobject.IndexOperationContext;
+import com.decentraldbcluster.dbclient.odm.statetracker.dataobject.IndexDataObject;
 import com.decentraldbcluster.dbclient.query.QueryFactory;
 
 import java.util.HashSet;
@@ -11,7 +11,7 @@ import java.util.Set;
 
 public class IndexManager {
     private final DbClient dbClient = DbClient.getInstance();
-    public void manageIndexes(IndexOperationContext context) {
+    public void manageIndexes(IndexDataObject context) {
         createIndexesForNewCollections(context.addedCollections, context.currentState);
         updateIndexesForExistingCollections(context);
     }
@@ -27,7 +27,7 @@ public class IndexManager {
         }
     }
 
-    private void updateIndexesForExistingCollections(IndexOperationContext context) {
+    private void updateIndexesForExistingCollections(IndexDataObject context) {
         for (String collectionName : context.currentState.keySet()) {
             if (!context.addedCollections.contains(collectionName) && !context.removedCollections.contains(collectionName)) {
                 Set<String> currentIndexes = context.currentState.get(collectionName);

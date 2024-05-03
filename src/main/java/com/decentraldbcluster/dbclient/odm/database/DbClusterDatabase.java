@@ -2,10 +2,10 @@ package com.decentraldbcluster.dbclient.odm.database;
 
 import com.decentraldbcluster.dbclient.odm.statetracker.DatabaseStateTracker;
 
-public abstract class Database {
+public abstract class DbClusterDatabase {
     private static volatile boolean isTracked = false;
 
-    public Database() {
+    public DbClusterDatabase() {
         DatabaseInitializer.initialize(this);
         trackDatabaseState();
     }

@@ -6,7 +6,7 @@ public abstract class Query {
     @JsonProperty
     protected String originator;
     @JsonProperty
-    protected String database;
+    protected String databaseName;
     @JsonProperty
     protected String collection;
 
@@ -18,8 +18,8 @@ public abstract class Query {
         this.originator = originator;
     }
 
-    protected void setDatabase(String database) {
-        this.database = database;
+    protected void setDatabaseName(String databaseName) {
+        this.databaseName = databaseName;
     }
 
     public void setCollection(String collection) {

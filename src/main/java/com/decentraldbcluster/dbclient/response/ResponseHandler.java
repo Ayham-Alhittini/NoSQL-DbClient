@@ -1,6 +1,5 @@
 package com.decentraldbcluster.dbclient.response;
 
-import com.decentraldbcluster.dbclient.response.QueryResponse;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -13,10 +12,10 @@ public class ResponseHandler {
         this.mapper = mapper;
     }
 
-    public <T> T parseResponse(QueryResponse response, JavaType type, String collectionId) {
+    public <T> T parseResponse(QueryResponse response, JavaType type, String collectionIdName) {
         if (response.isSucceed()) {
             try {
-                String json = response.getResult().replace("\"object_id\"", "\""+collectionId+"\"");
+                String json = response.getResult().replace("\"object_id\"", "\""+collectionIdName+"\"");
                 return mapper.readValue(json, type);
             } catch (IOException e) {
                 throw new RuntimeException(e);

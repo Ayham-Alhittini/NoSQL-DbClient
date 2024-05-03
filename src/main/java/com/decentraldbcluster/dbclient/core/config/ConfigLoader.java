@@ -1,4 +1,4 @@
-package com.decentraldbcluster.dbclient.config;
+package com.decentraldbcluster.dbclient.core.config;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;

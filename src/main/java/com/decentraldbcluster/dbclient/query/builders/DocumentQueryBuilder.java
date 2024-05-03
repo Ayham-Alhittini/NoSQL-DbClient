@@ -4,6 +4,7 @@ import com.decentraldbcluster.dbclient.query.actions.DocumentAction;
 import com.decentraldbcluster.dbclient.query.types.DocumentQuery;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class DocumentQueryBuilder implements QueryBuilder {
     private final DocumentQuery query = new DocumentQuery();
@@ -32,6 +33,11 @@ public class DocumentQueryBuilder implements QueryBuilder {
     public DocumentQueryBuilder insert(JsonNode content) {
         query.setDocumentAction(DocumentAction.ADD);
         query.setContent(content);
+        return this;
+    }
+
+    public DocumentQueryBuilder withId(String id) {
+        query.setDocumentId(id);
         return this;
     }
 

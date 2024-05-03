@@ -31,7 +31,7 @@ public class CollectionQuery extends Query {
                 "collectionAction=" + collectionAction +
                 ", schema='" + schema + '\'' +
                 ", originator='" + originator + '\'' +
-                ", database='" + database + '\'' +
+                ", database='" + databaseName + '\'' +
                 ", collection='" + collection + '\'' +
                 '}';
     }

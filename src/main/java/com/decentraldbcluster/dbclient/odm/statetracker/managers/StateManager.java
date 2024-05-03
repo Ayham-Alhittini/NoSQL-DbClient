@@ -2,7 +2,7 @@ package com.decentraldbcluster.dbclient.odm.statetracker.managers;
 
 import com.decentraldbcluster.dbclient.odm.annotations.Id;
 import com.decentraldbcluster.dbclient.odm.annotations.Indexed;
-import com.decentraldbcluster.dbclient.odm.collection.Collection;
+import com.decentraldbcluster.dbclient.odm.collection.DbClusterCollection;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -40,7 +40,7 @@ public class StateManager {
         Map<String, Set<String>> currentDatabaseState = new HashMap<>();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
-            if (Collection.class.isAssignableFrom(field.getType())) {
+            if (DbClusterCollection.class.isAssignableFrom(field.getType())) {
                 field.setAccessible(true);
                 Type genericFieldType = field.getGenericType();
                 if (genericFieldType instanceof ParameterizedType parameterizedType) {

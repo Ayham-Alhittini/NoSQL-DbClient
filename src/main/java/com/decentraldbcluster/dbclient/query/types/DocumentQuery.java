@@ -57,12 +57,13 @@ public class DocumentQuery extends Query {
     @Override
     public String toString() {
         return "DocumentQuery{" +
-                "documentAction=" + documentAction +
-                ", condition='" + condition + '\'' +
-                ", content='" + content + '\'' +
-                ", newContent='" + newContent + '\'' +
+                "documentId='" + documentId + '\'' +
+                ", content=" + content +
+                ", condition=" + condition +
+                ", newContent=" + newContent +
+                ", documentAction=" + documentAction +
                 ", originator='" + originator + '\'' +
-                ", database='" + database + '\'' +
+                ", database='" + databaseName + '\'' +
                 ", collection='" + collection + '\'' +
                 '}';
     }

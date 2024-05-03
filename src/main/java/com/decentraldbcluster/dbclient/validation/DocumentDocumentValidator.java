@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DocumentDocumentValidator {
+
     public static void validate(DocumentQuery query) {
 
         List<String> errors = new ArrayList<>();
@@ -29,14 +30,5 @@ public class DocumentDocumentValidator {
             errors.add("Content is required for add action");
         }
     }
-
-    //for delete we need the ID
-
-    //for update and replace we need the ID and new content
-
-
-
-
-
 
 }

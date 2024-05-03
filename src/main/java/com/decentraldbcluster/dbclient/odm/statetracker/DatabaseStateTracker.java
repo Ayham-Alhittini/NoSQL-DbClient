@@ -1,9 +1,9 @@
 package com.decentraldbcluster.dbclient.odm.statetracker;
 
-import com.decentraldbcluster.dbclient.odm.database.Database;
+import com.decentraldbcluster.dbclient.odm.database.DbClusterDatabase;
 import com.decentraldbcluster.dbclient.odm.statetracker.managers.CollectionManager;
 import com.decentraldbcluster.dbclient.odm.statetracker.managers.IndexManager;
-import com.decentraldbcluster.dbclient.odm.statetracker.dataobject.IndexOperationContext;
+import com.decentraldbcluster.dbclient.odm.statetracker.dataobject.IndexDataObject;
 import com.decentraldbcluster.dbclient.odm.statetracker.managers.StateManager;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ public class DatabaseStateTracker {
 
 
 
-    public static void track(Class<? extends Database> subclass) {
+    public static void track(Class<? extends DbClusterDatabase> subclass) {
 
         Map<String, Set<String>> previousState = stateManager.deserializeState();
         Map<String, Set<String>> currentState = stateManager.getCurrentDatabaseState(subclass);
@@ -28,8 +28,8 @@ public class DatabaseStateTracker {
 
         collectionManager.manageCollections(addedCollections, removedCollections);
 
-        IndexOperationContext context = new IndexOperationContext(addedCollections, removedCollections, previousState, currentState);
-        indexManager.manageIndexes(context);
+        IndexDataObject indexDataObject = new IndexDataObject(addedCollections, removedCollections, previousState, currentState);
+        indexManager.manageIndexes(indexDataObject);
 
         stateManager.serializeState(currentState);
     }

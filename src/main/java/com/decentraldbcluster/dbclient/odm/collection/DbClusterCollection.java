@@ -11,9 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
-public class Collection<Entity> {
+public class DbClusterCollection<Entity> {
 
     private final DbClient dbClient = DbClient.getInstance();
     private final ObjectMapper mapper = ObjectMapperConfigurator.configureMapper();
@@ -22,30 +21,50 @@ public class Collection<Entity> {
     private final String collectionName;
     private final JavaType entityType;
     private final JavaType singleEntityType;
-    private final String collectionId;
+    private final String collectionIdName;
 
-    public Collection(Class<Entity> clazz, String collectionName, String collectionId) {
+    public DbClusterCollection(Class<Entity> clazz, String collectionName, String collectionId) {
         this.collectionName = collectionName;
         this.entityType = mapper.getTypeFactory().constructParametricType(List.class, clazz);
         this.singleEntityType = mapper.getTypeFactory().constructType(clazz);
-        this.collectionId = collectionId;
+        this.collectionIdName = collectionId;
     }
 
     public Entity save(Entity entity) {
-        Query query = QueryFactory.buildSaveQuery(collectionName, mapper.valueToTree(entity), collectionId);
+
+        JsonNode entityNode = mapper.valueToTree(entity);
+        Query query = isInsertRequest(entityNode) ? QueryFactory.buildInsertQuery(collectionName, entityNode, collectionIdName) :
+                QueryFactory.buildReplaceQuery(collectionName, entityNode, collectionIdName);
+
         QueryResponse response = dbClient.executeQuery(query);
-        return responseHandler.parseResponse(response, singleEntityType, collectionId);
+        return responseHandler.parseResponse(response, singleEntityType, collectionIdName);
     }
+
+    public void saveAll(List<Entity> entities) {
+        for (Entity entity: entities)
+            save(entity);
+    }
+
+    private boolean isInsertRequest(JsonNode entityNode) {
+        if (entityNode.get(collectionIdName).isNull()) {
+            return true;
+        }
+
+        String id = entityNode.get(collectionIdName).asText();
+        return findById(id) == null;
+    }
+
 
     public List<Entity> findAll(JsonNode jsonNode) {
         Query query = QueryFactory.buildFindAllQuery(collectionName, jsonNode);
         QueryResponse response = dbClient.executeQuery(query);
-        return responseHandler.parseResponse(response, entityType, collectionId);
+        return responseHandler.parseResponse(response, entityType, collectionIdName);
     }
+
     public List<Entity> findAll() {
         Query query = QueryFactory.buildFindAllQuery(collectionName, null);
         QueryResponse response = dbClient.executeQuery(query);
-        return responseHandler.parseResponse(response, entityType, collectionId);
+        return responseHandler.parseResponse(response, entityType, collectionIdName);
     }
 
     public List<Entity> findAll(Map<String, Object> filter) {
@@ -56,13 +75,28 @@ public class Collection<Entity> {
         }
     }
 
-    public Optional<Entity> findById(String id) {
+
+    public List<Entity> findBy(String fieldName, Object value) {
+        JsonNode valueNode = mapper.valueToTree(value);
+        JsonNode filterNode = mapper.createObjectNode().put(fieldName, valueNode.asText());
+        return findAll(filterNode);
+    }
+
+    public Entity findFirstBy(String fieldName, Object value) {
+        List<Entity> result = findBy(fieldName, value);
+
+        if (result.isEmpty())
+            return null;
+        return result.get(0);
+    }
+
+    public Entity findById(String id) {
         Query query = QueryFactory.buildFindByIdQuery(collectionName, id);
         QueryResponse response = dbClient.executeQuery(query);
         if (response.isSucceed()) {
-            return Optional.of(responseHandler.parseResponse(response, singleEntityType, collectionId));
+            return responseHandler.parseResponse(response, singleEntityType, collectionIdName);
         }
-        return Optional.empty();
+        return null;
     }
 
     public boolean deleteById(String id) {

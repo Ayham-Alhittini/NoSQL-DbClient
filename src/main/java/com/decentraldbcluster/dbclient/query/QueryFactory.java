@@ -9,28 +9,24 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class QueryFactory {
 
-    public static Query buildSaveQuery(String collectionName, JsonNode entity, String collectionIdName) {
-        JsonNode collectionId;
-        if (entity instanceof ObjectNode mutableData) {
-            collectionId = mutableData.remove(collectionIdName);
-        } else {
-            throw new RuntimeException("Invalid entity type");
-        }
-        if (collectionId.isNull()) {
-            return QueryFactory.buildInsertQuery(collectionName, entity);
-        } else {
-            return QueryFactory.buildReplaceQuery(collectionName, collectionId.asText(), entity);
-        }
-    }
+    public static Query buildInsertQuery(String collectionName, JsonNode entityData, String collectionIdName) {
 
-    public static Query buildInsertQuery(String collectionName, JsonNode entityData) {
+        JsonNode object_id = null;
+        if (entityData instanceof ObjectNode objectNode) {
+            object_id = objectNode.remove(collectionIdName);
+        }
         return new DocumentQueryBuilder()
                 .collection(collectionName)
                 .insert(entityData)
+                .withId(object_id == null || object_id.isNull() ? null : object_id.asText())
                 .build();
     }
 
-    public static Query buildReplaceQuery(String collectionName, String id, JsonNode newEntityData) {
+    public static Query buildReplaceQuery(String collectionName, JsonNode newEntityData, String collectionIdName) {
+        String id = null;
+        if (newEntityData instanceof ObjectNode objectNode) {
+            id = objectNode.remove(collectionIdName).asText();
+        }
         return new DocumentQueryBuilder()
                 .collection(collectionName)
                 .replace(id, newEntityData)

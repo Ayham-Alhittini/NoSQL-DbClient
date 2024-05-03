@@ -30,7 +30,7 @@ public class IndexQuery extends Query {
                 "indexAction=" + indexAction +
                 ", field='" + field + '\'' +
                 ", originator='" + originator + '\'' +
-                ", database='" + database + '\'' +
+                ", database='" + databaseName + '\'' +
                 ", collection='" + collection + '\'' +
                 '}';
     }
